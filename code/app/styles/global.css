@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
 @import 'config.css';
 
 :global {
@@ -7,5 +8,19 @@
     }
     body {
         margin: 0;
+        font-family: var(--fontFamily);
+
+        @media (--desktop) {
+            font-size: var(--fontSizeDesktop);
+        }
+        @media (--tablet-only) {
+            font-size: var(--fontSizeTablet);
+        }
+        @media (--mobile) {
+            font-size: var(--fontSizeMobile);
+        }
+    }
+    input {
+        font-family: var(--fontFamily);
     }
 }

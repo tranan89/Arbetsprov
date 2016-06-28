@@ -1,4 +1,28 @@
 :root {
     --darkBlue: #002650;
     --lightBlue: #3b58a7;
+    --grayBlue: #8092a7;
+    --placeholderColor: #b7c1cd;
+
+    --spacingDefault: 2rem;
+    --spacingLarge: 2.142857142857143rem;
+
+    --fontFamily: 'Open Sans', sans-serif;
+
+    --fontSizeMobile: 13px;
+    --fontSizeTablet: 14px;
+    --fontSizeDesktop: 15px;
+
+    --fontSizeRegular: 1rem;
+    --fontSizeMedium: 1.538461538461538rem;
+
+    --itemHeight: 4.153846153846154rem;
+
+    --radius: 0.3076923076923077rem;
+
+    --tabletMaxWidth: 960px;
 }
+
+@custom-media --desktop (width > 960px);
+@custom-media --tablet-only (width > 480px) and (width < 960px);
+@custom-media --mobile (width <= 480px);
