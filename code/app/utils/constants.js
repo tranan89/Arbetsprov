@@ -1,0 +1,1 @@
+﻿export const restEndpoint = 'http://swapi.co/api/';
