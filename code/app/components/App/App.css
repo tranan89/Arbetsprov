@@ -1,9 +1,21 @@
 @import 'styles/global.css';
 
-.test {
-    color: var(--lightBlue);
+.root {
+    max-width: 750px;
+    margin: 0 auto;
 
     h3 {
         text-align: center;
+    }
+}
+
+header {
+    height: calc(155 / var(--baseSize))rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+        height: calc(34 / var(--baseSize))rem;
     }
 }

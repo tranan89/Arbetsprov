@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import CSSModules from 'react-css-modules';
-import styles from './SearchAutocomplete.css';
+import styles from './AutocompleteList.css';
 
 class AutocompleteList extends Component {
     constructor(props) {
@@ -12,12 +12,12 @@ class AutocompleteList extends Component {
 
         const listItems = list.map((item) => {
             return (
-                <li>{ item.name }</li>
+                <li key={ item.alpha3Code }>{ item.name }</li>
             );
         });
 
         return (
-            <div styleName="box">
+            <div styleName="root">
                 <ul>
                     { listItems }
                 </ul>

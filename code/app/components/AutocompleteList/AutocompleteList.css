@@ -1,9 +1,9 @@
-@import 'styles/global.css';
+@import 'styles/config.css';
 
-.test {
-    color: var(--lightBlue);
-
-    h3 {
-        text-align: center;
-    }
+.root {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: var(--spacingDefault);
 }

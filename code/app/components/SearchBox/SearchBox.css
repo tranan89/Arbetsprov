@@ -1,0 +1,39 @@
+@import 'styles/config.css';
+
+.root {
+    position: relative;
+    display: flex;
+    height: var(--itemHeight);
+    margin: 0 var(--spacingLarge) var(--spacingLarge);
+    background-color: var(--grayBlue);
+    border-radius: var(--radius);
+
+    input {
+        flex-grow: 1;
+        height: 100%;
+        width: 100%;
+        padding: 0;
+        padding-right: var(--spacingDefault);
+        margin: 0;
+        color: #fff;
+        background: transparent;
+        outline: none;
+        border: none;
+        font-size: var(--fontSizeMedium);
+    }
+    input::placeholder {
+        color: var(--placeholderColor);
+    }
+}
+
+.icon-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    width: calc(var(--spacingDefault) * 2);
+
+    img {
+        height: calc(17 / var(--baseSize))rem;
+    }
+}
