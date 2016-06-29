@@ -8,6 +8,7 @@ import ResultList from '../ResultList';
 import { tabletWidth, mobileWidth } from 'utils/constants';
 import debounce from 'lodash/debounce';
 
+const autocompleteLimit = 5;
 
 class App extends Component {
     constructor(props) {

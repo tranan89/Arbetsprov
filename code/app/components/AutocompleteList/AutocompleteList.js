@@ -42,10 +42,13 @@ class AutocompleteList extends Component {
     getStyles() {
         const { device } = this.props;
 
+        let height = 52;
 
         if (device.isTablet) {
+            height = 48;
         }
         if (device.isMobile) {
+            height = 46;
         }
 
         return this.props.list.map((item, i) => {
