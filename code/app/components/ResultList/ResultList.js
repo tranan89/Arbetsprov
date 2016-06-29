@@ -38,7 +38,7 @@ class ResultList extends Component {
                 <li
                     styleName={ itemClass }
                     onClick={ () => this.onClick(item) }
-                    key={ item.name }
+                    key={ item.id }
                 >
                     <div styleName="item-content">
                         <p>{ item.name }</p>

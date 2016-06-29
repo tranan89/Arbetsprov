@@ -5,6 +5,9 @@ import { getCountriesWithName } from 'utils/fetcher';
 import SearchBox from '../SearchBox';
 import logo from 'images/logo.svg';
 import ResultList from '../ResultList';
+import { tabletWidth, mobileWidth } from 'utils/constants';
+import debounce from 'lodash/debounce';
+
 
 class App extends Component {
     constructor(props) {
@@ -13,10 +16,60 @@ class App extends Component {
         this.search = this.search.bind(this);
         this.addCountry = this.addCountry.bind(this);
         this.removeCountry = this.removeCountry.bind(this);
+        this.setDevice = debounce(this.setDevice.bind(this), 50);
 
         this.state = {
             countries: [],
-            savedCountries: []
+            savedCountries: [],
+            device: {
+                isMobile: false,
+                isTablet: false,
+                isDesktop: false
+            }
+        }
+    }
+
+    componentDidMount() {
+        this.setDevice();
+        window.addEventListener('resize', this.setDevice);
+    }
+
+    setDevice() {
+        const { isMobile, isTablet, isDesktop } = this.state;
+        const width = window.outerWidth;
+
+        if (width <= mobileWidth) {
+            if (!isMobile) {
+                this.setState({
+                    device: {
+                        isMobile: true,
+                        isTablet: false,
+                        isDesktop: false
+                    }
+                });
+            }
+        }
+        else if (width <= tabletWidth) {
+            if (!isTablet) {
+                this.setState({
+                    device: {
+                        isMobile: false,
+                        isTablet: true,
+                        isDesktop: false
+                    }
+                });
+            }
+        }
+        else {
+            if (!isDesktop) {
+                this.setState({
+                    device: {
+                        isMobile: false,
+                        isTablet: false,
+                        isDesktop: true
+                    }
+                });
+            }
         }
     }
 
@@ -38,10 +91,12 @@ class App extends Component {
 
     addCountry(country) {
         const { savedCountries } = this.state;
+        const timeNow = Date.now();
+
         const newCountry = {
-            id: country.alpha3Code,
+            id: country.alpha3Code + timeNow,
             name: country.name,
-            time: Date.now()
+            time: timeNow
         };
 
         this.setState({
@@ -62,7 +117,7 @@ class App extends Component {
     }
 
     render() {
-        const { countries, savedCountries } = this.state;
+        const { countries, savedCountries, device } = this.state;
 
         return (
             <div styleName="root">
@@ -70,13 +125,15 @@ class App extends Component {
                     <img src={ logo } />
                 </header>
                 <SearchBox
-                    list={ countries }
+                    list={ countries.slice(0, autocompleteLimit) }
                     onChange={ this.search }
                     onItemSelect={ this.addCountry }
+                    device={ device }
                 />
                 <ResultList
                     list={ savedCountries }
                     remove={ this.removeCountry }
+                    device={ device }
                 />
             </div>
         );

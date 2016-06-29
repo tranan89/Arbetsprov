@@ -26,11 +26,9 @@ class SearchBox extends Component {
     }
 
     onChange(value) {
-        if (!value.length) {
-            this.setState({
-                activeItemIndex: -1
-            });
-        }
+        this.setState({
+            activeItemIndex: -1
+        });
 
         this.props.onChange(value);
     }
@@ -39,15 +37,19 @@ class SearchBox extends Component {
         switch(e.key) {
             case 'ArrowDown':
                 this.incrementIndex();
+                e.preventDefault();
                 break;
             case 'ArrowUp':
                 this.decrementIndex();
+                e.preventDefault();
                 break;
             case 'Escape':
                 this.inputNode.blur();
+                e.preventDefault();
                 break;
             case 'Enter':
                 this.onEnter();
+                e.preventDefault();
                 break;
         }
     }
@@ -109,7 +111,7 @@ class SearchBox extends Component {
     }
 
     getAutocomplete() {
-        const { list } = this.props;
+        const { list, device } = this.props;
         const { activeItemIndex, inputFocused } = this.state;
 
         if (!list.length || !inputFocused) {
@@ -118,9 +120,10 @@ class SearchBox extends Component {
 
         return (
             <AutocompleteList
-                list={ list.slice(0, 10) }
+                list={ list }
                 activeIndex={ activeItemIndex }
                 onClick={ this.selectItem }
+                device={ device }
             />
         );
     }
@@ -158,7 +161,8 @@ class SearchBox extends Component {
 SearchBox.PropTypes = {
     list: PropTypes.array,
     onChange: PropTypes.function,
-    onItemSelect: PropTypes.function
+    onItemSelect: PropTypes.function,
+    device: PropTypes.object
 };
 
 export default CSSModules(SearchBox, styles);

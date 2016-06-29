@@ -15,9 +15,11 @@
         padding: var(--spacingExtraSmall) 0;
     }
     li {
-        padding: var(--spacingExtraSmall) var(--spacingSmall);
+        padding: 0 var(--spacingSmall);
         color: inherit;
         cursor: pointer;
+        display: flex;
+        align-items: center;
     }
 }
 
