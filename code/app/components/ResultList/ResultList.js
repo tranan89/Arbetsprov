@@ -4,12 +4,16 @@ import styles from './ResultList.css';
 import CrossIcon from '../CrossIcon';
 import { getFormattedTime } from 'utils/time';
 import findIndex from 'lodash/findIndex';
+import { TransitionMotion, spring, presets } from 'react-motion';
 
 class ResultList extends Component {
     constructor(props) {
         super(props);
 
         this.onClick = this.onClick.bind(this);
+        this.getDefaultStyles = this.getDefaultStyles.bind(this);
+        this.getStyles = this.getStyles.bind(this);
+        this.getList = this.getList.bind(this);
 
         this.state = {
             activeIndex: -1
@@ -27,25 +31,71 @@ class ResultList extends Component {
         });
     }
 
-    render() {
-        const { list, remove } = this.props;
+    willEnter() {
+        return {
+            height: 0,
+            opacity: 1
+        };
+    }
+
+    willLeave() {
+        return {
+            height: spring(0),
+            opacity: spring(0)
+        };
+    }
+
+    getDefaultStyles() {
+        return this.props.list.map(item => {
+            return {
+                data: item,
+                key: item.id,
+                style: {
+                    height: 0,
+                    opacity: 1
+                }
+            }
+        });
+    }
+
+    getStyles() {
+        const rootFontSize = getComputedStyle(document.documentElement)['font-size'];
+        const height = 4.15385 * Number(rootFontSize.replace('px', ''));
+
+        return this.props.list.map((item, i) => {
+            return {
+                data: item,
+                key: item.id,
+                style: {
+                    height: spring(height, presets.gentle),
+                    opacity: spring(1, presets.gentle)
+                }
+            };
+        });
+    }
+
+    getList(animationStyles) {
+        const { remove } = this.props;
         const { activeIndex } = this.state;
 
-        const listItems = list.map((item, index) => {
+        const items = animationStyles.map(({ style, key, data }, index) => {
             const itemClass = index === activeIndex ? 'item-active' : 'item-inactive';
 
             return (
                 <li
-                    styleName={ itemClass }
-                    onClick={ () => this.onClick(item) }
-                    key={ item.id }
+                    style={ style }
+                    className={ styles[itemClass] }
+                    onClick={ () => this.onClick(data) }
+                    key={ key }
                 >
-                    <div styleName="item-content">
-                        <p>{ item.name }</p>
-                        <p styleName="time">{ getFormattedTime(item.time) }</p>
+                    <div className={ styles['item-content'] }>
+                        <p>{ data.name }</p>
+                        <p className={ styles['time'] }>
+                            { getFormattedTime(data.time) }
+                        </p>
                         <div
-                            styleName="remove-item"
-                            onClick={ () => remove(item) }
+                            className={ styles['remove-item'] }
+                            onClick={ () => remove(data) }
                         >
                             <CrossIcon />
                         </div>
@@ -55,10 +105,23 @@ class ResultList extends Component {
         });
 
         return (
+            <ul>
+                { items }
+            </ul>
+        )
+    }
+
+    render() {
+        return (
             <div styleName="root">
-                <ul>
-                    { listItems }
-                </ul>
+                <TransitionMotion
+                    defaultStyles={ this.getDefaultStyles() }
+                    styles={ this.getStyles() }
+                    willLeave={ this.willLeave }
+                    willEnter={ this.willEnter }
+                >
+                    { this.getList }
+                </TransitionMotion>
             </div>
         );
     }
