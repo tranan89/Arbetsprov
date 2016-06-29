@@ -8,11 +8,19 @@ class AutocompleteList extends Component {
     }
 
     render() {
-        const { list } = this.props;
+        const { list, activeIndex, onClick } = this.props;
 
-        const listItems = list.map((item) => {
+        const listItems = list.map((item, index) => {
+            const className = index === activeIndex ? 'active-item' : '';
+
             return (
-                <li key={ item.alpha3Code }>{ item.name }</li>
+                <li
+                    key={ item.alpha3Code }
+                    styleName={ className }
+                    onClick={ () => onClick(index) }
+                >
+                    { item.name }
+                </li>
             );
         });
 
@@ -27,7 +35,9 @@ class AutocompleteList extends Component {
 }
 
 AutocompleteList.PropTypes = {
-    list: PropTypes.array
+    list: PropTypes.array,
+    activeIndex: PropTypes.number,
+    onClick: PropTypes.function
 };
 
 export default CSSModules(AutocompleteList, styles);

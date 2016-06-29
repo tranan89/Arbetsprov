@@ -5,5 +5,20 @@
     top: 100%;
     left: 0;
     right: 0;
-    margin-top: var(--spacingDefault);
+    margin-top: 1px;
+    background: inherit;
+    border-bottom-left-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
+
+    ul {
+        padding: var(--spacingExtraSmall) 0;
+    }
+    li {
+        padding: var(--spacingExtraSmall) var(--spacingSmall);
+        color: inherit;
+    }
+}
+
+.active-item {
+    background: var(--darkBlue);
 }

@@ -6,7 +6,7 @@
     height: var(--itemHeight);
     margin: 0 var(--spacingLarge) var(--spacingLarge);
     background-color: var(--grayBlue);
-    border-radius: var(--radius);
+    color: #fff;
 
     input {
         flex-grow: 1;
@@ -15,7 +15,7 @@
         padding: 0;
         padding-right: var(--spacingDefault);
         margin: 0;
-        color: #fff;
+        color: inherit;
         background: transparent;
         outline: none;
         border: none;
@@ -24,6 +24,17 @@
     input::placeholder {
         color: var(--placeholderColor);
     }
+}
+
+.root-with-autocomplete {
+    composes: root;
+    border-top-left-radius: var(--radius);
+    border-top-right-radius: var(--radius);
+}
+
+.root-without-autocomplete {
+    composes: root;
+    border-radius: var(--radius);
 }
 
 .icon-wrap {

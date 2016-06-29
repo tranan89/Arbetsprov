@@ -10,14 +10,11 @@ class App extends Component {
         super(props);
 
         this.search = this.search.bind(this);
+        this.addCountry = this.addCountry.bind(this);
 
         this.state = {
             countries: []
         }
-    }
-
-    componentWillMount() {
-
     }
 
     search(text) {
@@ -36,6 +33,10 @@ class App extends Component {
             })
     }
 
+    addCountry(country) {
+        console.info('add country', country.name);
+    }
+
     render() {
         const { countries } = this.state;
 
@@ -47,6 +48,7 @@ class App extends Component {
                 <SearchBox
                     list={ countries }
                     onChange={ this.search }
+                    onItemSelect={ this.addCountry }
                 />
             </div>
         );

@@ -1,8 +1,8 @@
 const restEndpoint = 'https://restcountries.eu/rest/v1';
 
 export function getCountriesWithName(name) {
-    if (!name || !name.length) {
-        return Promise.reject('Empty country name');
+    if (!name || name.length < 2) {
+        return Promise.reject('Empty or too short country name');
     }
 
     return fetch(`${ restEndpoint }/name/${ name }`)

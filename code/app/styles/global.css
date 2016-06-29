@@ -9,7 +9,7 @@
         @media (--desktop) {
             font-size: var(--fontSizeDesktop);
         }
-        @media (--tablet-only) {
+        @media (--tabletOnly) {
             font-size: var(--fontSizeTablet);
         }
         @media (--mobile) {
@@ -22,5 +22,10 @@
     }
     input {
         font-family: var(--fontFamily);
+    }
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
     }
 }
