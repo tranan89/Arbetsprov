@@ -38,8 +38,8 @@ module.exports = {
                 test: /\.css$/,
                 loaders: [
                     'style?sourceMap',
-                    'css?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
-                    'postcss'
+                    'css?sourceMap&modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
+                    'postcss?sourceMap'
                 ],
                 exclude: /node_modules/
             },
@@ -57,7 +57,9 @@ module.exports = {
                 path: 'app'
             }),
             require('postcss-nested'),
-            require('postcss-cssnext')
+            require('postcss-cssnext')({
+                browsers: ['last 2 versions']
+            })
         ];
     },
 
