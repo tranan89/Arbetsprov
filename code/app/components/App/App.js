@@ -4,6 +4,7 @@ import styles from './App.css';
 import { getCountriesWithName } from 'utils/fetcher';
 import SearchBox from '../SearchBox';
 import logo from 'images/logo.svg';
+import ResultList from '../ResultList';
 
 class App extends Component {
     constructor(props) {
@@ -11,9 +12,11 @@ class App extends Component {
 
         this.search = this.search.bind(this);
         this.addCountry = this.addCountry.bind(this);
+        this.removeCountry = this.removeCountry.bind(this);
 
         this.state = {
-            countries: []
+            countries: [],
+            savedCountries: []
         }
     }
 
@@ -34,11 +37,32 @@ class App extends Component {
     }
 
     addCountry(country) {
-        console.info('add country', country.name);
+        const { savedCountries } = this.state;
+        const newCountry = {
+            id: country.alpha3Code,
+            name: country.name,
+            time: Date.now()
+        };
+
+        this.setState({
+            savedCountries: savedCountries.concat(newCountry)
+        })
+    }
+
+    removeCountry(removeCountry) {
+        const { savedCountries } = this.state;
+
+        const countries = savedCountries.filter((country) => {
+            return country.id !== removeCountry.id;
+        });
+
+        this.setState({
+            savedCountries: countries
+        })
     }
 
     render() {
-        const { countries } = this.state;
+        const { countries, savedCountries } = this.state;
 
         return (
             <div styleName="root">
@@ -49,6 +73,10 @@ class App extends Component {
                     list={ countries }
                     onChange={ this.search }
                     onItemSelect={ this.addCountry }
+                />
+                <ResultList
+                    list={ savedCountries }
+                    remove={ this.removeCountry }
                 />
             </div>
         );

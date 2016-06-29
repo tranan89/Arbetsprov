@@ -1,0 +1,81 @@
+@import 'styles/config.css';
+
+.root {
+    color: #fff;
+    width: 100%;
+    background: linear-gradient(var(--listDarkBlue), var(--listLightBlue));
+}
+
+.item {
+    height: var(--itemSize);
+    display: flex;
+}
+
+.item-inactive {
+    composes: item;
+
+    svg {
+        display: none;
+    }
+}
+
+.item-active {
+    composes: item;
+    background-color: var(--activeBlue);
+
+    .remove-item {
+        background-color: var(--red);
+    }
+}
+
+.item-content {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: var(--contentWidth);
+    margin: 0 auto;
+    cursor: pointer;
+
+    @media (--tabletMax) {
+        padding-left: var(--itemSize);
+        padding-right: calc(var(--itemSize) * 2);
+    }
+    @media (--desktop) {
+        p:first-child {
+            max-width: 33%;
+        }
+    }
+}
+
+.time {
+    @media (--tabletMax) {
+        padding-left: var(--spacingSmall);
+        text-align: right;
+    }
+    @media (--desktop) {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.remove-item {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--itemSize);
+
+    svg {
+        width: var(--iconSize);
+        height: var(--iconSize);
+        border-radius: 100%;
+        background-color: #fff;
+    }
+}

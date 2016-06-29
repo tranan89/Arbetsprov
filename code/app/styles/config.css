@@ -1,8 +1,14 @@
 :root {
-    --darkBlue: #002650;
-    --lightBlue: #3b58a7;
+    --bgDarkBlue: #002650;
+    --bgLightBlue: #3b58a7;
+
+    --listDarkBlue: #1e3f68;
+    --listLightBlue: #3c5894;
+
     --grayBlue: #8092a7;
+    --activeBlue: #39577f;
     --placeholderColor: #b7c1cd;
+    --red: #7b3b55;
 
     --spacingExtraSmall: 0.5rem;
     --spacingSmall: 1rem;
@@ -20,13 +26,16 @@
     --fontSizeRegular: 1rem;
     --fontSizeMedium: calc(20 / var(--baseSize))rem;
 
-    --itemHeight: calc(54 / var(--baseSize))rem;
+    --itemSize: calc(54 / var(--baseSize))rem;
+    --iconSize: calc(17 / var(--baseSize))rem;
 
     --radius: calc(4 / var(--baseSize))rem;
 
     --tabletMaxWidth: 900px;
+    --contentWidth: 800px;
 }
 
-@custom-media --desktop (width > 900px);
-@custom-media --tabletOnly (width > 480px) and (width < 900px);
+@custom-media --desktop (width > 800px);
+@custom-media --tabletOnly (width > 480px) and (width < 800px);
+@custom-media --tabletMax (width < 800px);
 @custom-media --mobile (width <= 480px);

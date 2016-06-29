@@ -2,9 +2,14 @@
 @import 'config.css';
 
 :global {
+    *,
+    *::before,
+    *::after {
+        box-sizing: border-box;
+    }
     html {
         min-height: 100%;
-        background: linear-gradient(var(--darkBlue), var(--lightBlue));
+        background: linear-gradient(var(--bgDarkBlue), var(--bgLightBlue));
 
         @media (--desktop) {
             font-size: var(--fontSizeDesktop);
@@ -26,6 +31,9 @@
     ul {
         list-style: none;
         padding: 0;
+        margin: 0;
+    }
+    p {
         margin: 0;
     }
 }

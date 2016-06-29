@@ -77,7 +77,6 @@ class SearchBox extends Component {
 
         onItemSelect(activeItem);
 
-        this.inputNode.blur();
         this.setActiveItemIndex(index);
     }
 
@@ -129,26 +128,28 @@ class SearchBox extends Component {
     render() {
         const autocompleteList = this.getAutocomplete();
 
-        const rootClass = autocompleteList ? 'root-with-autocomplete' : 'root-without-autocomplete';
+        const boxClass = autocompleteList ? 'box-with-autocomplete' : 'box-without-autocomplete';
 
         return (
             <div
-                styleName={ rootClass }
+                styleName="root"
                 onKeyDown={ this.onKeyDown }
             >
-                <div styleName="icon-wrap">
-                    <img src={ searchIcon } />
+                <div styleName={ boxClass }>
+                    <div styleName="icon-wrap">
+                        <img src={ searchIcon } />
+                    </div>
+                    <input
+                        type="text"
+                        placeholder="Search for countries..."
+                        ref="input"
+                        autoFocus
+                        onChange={ (e) => this.onChange(e.target.value) }
+                        onFocus={ this.onFocus }
+                        onBlur={ this.onBlur }
+                    />
+                    { autocompleteList }
                 </div>
-                <input
-                    type="text"
-                    placeholder="Search for countries..."
-                    ref="input"
-                    autoFocus
-                    onChange={ (e) => this.onChange(e.target.value) }
-                    onFocus={ this.onFocus }
-                    onBlur={ this.onBlur }
-                />
-                { autocompleteList }
             </div>
         );
     }

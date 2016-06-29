@@ -1,10 +1,18 @@
 @import 'styles/config.css';
 
 .root {
+    max-width: var(--contentWidth);
+    margin: 0 auto var(--spacingLarge);
+
+    @media (--tabletMax) {
+        padding: 0 var(--spacingLarge);
+    }
+}
+
+.box {
     position: relative;
     display: flex;
-    height: var(--itemHeight);
-    margin: 0 var(--spacingLarge) var(--spacingLarge);
+    height: var(--itemSize);
     background-color: var(--grayBlue);
     color: #fff;
 
@@ -26,14 +34,14 @@
     }
 }
 
-.root-with-autocomplete {
-    composes: root;
+.box-with-autocomplete {
+    composes: box;
     border-top-left-radius: var(--radius);
     border-top-right-radius: var(--radius);
 }
 
-.root-without-autocomplete {
-    composes: root;
+.box-without-autocomplete {
+    composes: box;
     border-radius: var(--radius);
 }
 
