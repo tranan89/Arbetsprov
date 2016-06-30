@@ -78,8 +78,14 @@ class ResultList extends Component {
         const { remove } = this.props;
         const { activeIndex } = this.state;
 
+        if (!animationStyles.length) {
+            return false;
+        }
+
         const items = animationStyles.map(({ style, key, data }, index) => {
-            const itemClass = index === activeIndex ? 'item-active' : 'item-inactive';
+            const active = index === activeIndex;
+            const itemClass = active ? 'item-active' : 'item-inactive';
+            const onClick = active ? () => remove(data) : null;
 
             return (
                 <li
@@ -95,7 +101,7 @@ class ResultList extends Component {
                         </p>
                         <div
                             className={ styles['remove-item'] }
-                            onClick={ () => remove(data) }
+                            onClick={ onClick }
                         >
                             <CrossIcon />
                         </div>

@@ -1,14 +1,16 @@
 @import 'styles/config.css';
 
-.root {
+.root ul {
     color: #fff;
     width: 100%;
+    padding: var(--spacingSmall) 0;
     background: linear-gradient(var(--listDarkBlue), var(--listLightBlue));
 }
 
 .item {
     height: var(--itemSize);
     display: flex;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
 .item-inactive {
@@ -37,6 +39,10 @@
     max-width: var(--contentWidth);
     margin: 0 auto;
     cursor: pointer;
+
+    p:first-child {
+        font-weight: var(--bold);
+    }
 
     @media (--tabletMax) {
         padding-left: var(--itemSize);
